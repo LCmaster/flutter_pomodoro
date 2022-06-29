@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class ClockCap extends StatelessWidget {
   final int barCount;
-  final int minutes;
+  final int duration;
   final double progression;
   final double barWidth = 25;
 
   const ClockCap({
     Key? key,
     required this.barCount,
-    required this.minutes,
+    required this.duration,
     required this.progression,
   }) : super(key: key);
 
@@ -50,7 +50,7 @@ class ClockCap extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 transform: Matrix4.identity()
                   ..translate(constraints.maxWidth / 2 -
-                      barWidth * progression +
+                      barWidth * progression -
                       barWidth / 2),
                 child: Container(
                   constraints: BoxConstraints(
@@ -79,7 +79,7 @@ class ClockCap extends StatelessWidget {
                               ),
                               Container(
                                 height: (i % 5 == 0) ? 25 : 15,
-                                width: 2,
+                                width: (i % 5 == 0) ? 4 : 2,
                                 color: Colors.white,
                               ),
                             ],

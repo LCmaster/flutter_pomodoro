@@ -1,9 +1,10 @@
+import 'package:flutter_pomodoro/controllers/pomodoro_binding.dart';
+import 'package:flutter_pomodoro/controllers/settings_binding.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
-
-import './pages/home/home_page.dart';
-import './pages/settings_page.dart';
+import 'pages/settings/settings_page.dart';
+import 'pages/pomodoro/pomodoro_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GetMaterialApp(
       title: 'Pomodoro',
       theme: ThemeData.dark().copyWith(
@@ -21,11 +23,22 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.green,
         ),
       ),
-      routes: {
-        HomePage.routeName: (context) => const HomePage(),
-        SettingsPage.routeName: (context) => const SettingsPage(),
-      },
-      initialRoute: HomePage.routeName,
+      getPages: [
+        GetPage(
+          name: PomodoroPage.routeName,
+          page: () => const PomodoroPage(),
+          bindings: [
+            PomodoroBinding(),
+            SettingsBinding(),
+          ],
+        ),
+        GetPage(
+          name: SettingsPage.routeName,
+          page: () => const SettingsPage(),
+          binding: SettingsBinding(),
+        ),
+      ],
+      initialRoute: PomodoroPage.routeName,
       debugShowCheckedModeBanner: false,
     );
   }

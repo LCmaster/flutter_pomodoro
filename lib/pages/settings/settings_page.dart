@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../controllers/settings_controller.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends GetView<SettingsController> {
   static const routeName = '/settings';
+
   const SettingsPage({Key? key}) : super(key: key);
 
   @override

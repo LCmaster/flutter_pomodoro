@@ -1,27 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class MainBody extends StatelessWidget {
   final double iconSize = 48;
-  final int numberOfPomodoros;
-  final int active;
 
   const MainBody({
     Key? key,
-    required this.numberOfPomodoros,
-    required this.active,
   }) : super(key: key);
-
-  String _bulletType(int index) {
-    if (index < active) {
-      return 'assets/image/bullet_done.svg';
-    }
-    if (index == active) {
-      return 'assets/image/bullet_on.svg';
-    }
-
-    return 'assets/image/bullet.svg';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,22 +31,6 @@ class MainBody extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (int i = 0; i < numberOfPomodoros; i++)
-                      Container(
-                        width: 40.0,
-                        height: 40.0,
-                        margin: const EdgeInsets.all(10.0),
-                        child: SvgPicture.asset(
-                          _bulletType(i),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
               Positioned(
                 top: constraints.maxHeight / 5,
                 left: constraints.maxWidth / 2 - iconSize / 2,
