@@ -36,8 +36,9 @@ class PomodoroController extends GetxController
     _animationController = AnimationController(
       vsync: this,
       duration: _pomodoroDurationList[_index],
-    )..addStatusListener((animationStatus) {
+    )..addStatusListener((animationStatus) async {
         if (animationStatus == AnimationStatus.completed) {
+          await _audioController.ring();
           completed();
         }
       });
@@ -55,14 +56,13 @@ class PomodoroController extends GetxController
   }
 
   void completed() {
-    status(PomodoroStatus.stopped);
-    _audioController.stopTicking();
-    _audioController.ring();
-
     _index++;
-    if (_index < _pomodoroDurationList.length) {
-      animation(_setAnimation(_animationController));
+    if(_pomodoroDurationList.length <= _index) {
+      _index = 0;
     }
+
+    stop();
+    _resetAnimation();
   }
 
   Animation<double> _setAnimation(AnimationController animationController) {
@@ -81,6 +81,12 @@ class PomodoroController extends GetxController
     list.add(Duration(minutes: _settingsController.longBreakDuration.value));
 
     return list;
+  }
+
+  void _resetAnimation() {
+    _animationController.duration = _pomodoroDurationList[_index];
+    _animationController.reset();
+    animation(_setAnimation(_animationController));
   }
 
   @override
@@ -109,9 +115,7 @@ class PomodoroController extends GetxController
     _pomodoroDurationList.clear();
     _pomodoroDurationList.addAll(_resetDurationList());
 
-    _animationController.duration = _pomodoroDurationList[_index];
-    _animationController.reset();
-    animation(_setAnimation(_animationController));
+    _resetAnimation();
 
     canReset(false);
   }
