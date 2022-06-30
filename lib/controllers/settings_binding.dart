@@ -1,5 +1,6 @@
-import 'package:flutter_pomodoro/controllers/settings_controller.dart';
 import 'package:get/get.dart';
+
+import 'settings_controller.dart';
 
 class SettingsBinding implements Bindings {
   @override

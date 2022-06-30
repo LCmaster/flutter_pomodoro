@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import '../../controllers/pomodoro_controller.dart';
+import '../settings/settings_page.dart';
 import './widgets/clock_cap.dart';
 import './widgets/main_body.dart';
-import '../settings/settings_page.dart';
 
 class PomodoroPage extends GetView<PomodoroController> {
   static const routeName = '/pomodoro';
@@ -20,36 +20,38 @@ class PomodoroPage extends GetView<PomodoroController> {
           const MainBody(),
           Obx(
             () => AnimatedBuilder(
-              animation: controller.animation,
-              builder: (animContext, widget) {
-                return ClockCap(
-                  barCount: 60,
-                  duration: controller.pomodoroDuration.value,
-                  progression: controller.animation.value,
-                );
-              }
-            ),
+                animation: controller.animation.value,
+                builder: (animContext, widget) {
+                  return ClockCap(
+                    barCount: 60,
+                    duration: controller.currentDuration.inMinutes,
+                    progression: controller.animation.value.value,
+                  );
+                }),
           ),
-          Positioned(
-            bottom: 20,
-            left: 20,
-            child: TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(SettingsPage.routeName);
-              },
-              child: Column(
-                children: const [
-                  Icon(
-                    Icons.undo,
-                    color: Colors.white70,
+          Obx(
+            () => Visibility(
+              visible: controller.canReset.value,
+              child: Positioned(
+                bottom: 20,
+                left: 20,
+                child: TextButton(
+                  onPressed: controller.reset,
+                  child: Column(
+                    children: const [
+                      Icon(
+                        Icons.undo,
+                        color: Colors.white70,
+                      ),
+                      Text(
+                        'Reset',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'Reset',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
