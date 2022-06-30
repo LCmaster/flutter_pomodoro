@@ -1,2 +1,2 @@
-# A Simple Yet Effective Pomodoro App
+# A Very Simple Yet Effective Pomodoro App
 ![](preview.png)
