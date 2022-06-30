@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import 'package:flutter/material.dart';
 
 import '../../controllers/settings_controller.dart';
@@ -20,41 +19,47 @@ class SettingsPage extends GetView<SettingsController> {
           'Settings',
         ),
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Container(
-            width: constraints.maxWidth,
-            height: constraints.maxHeight,
-            decoration: BoxDecoration(
-              color: Colors.red,
-              // gradient: LinearGradient(
-              //   colors: [
-              //     // Color(0xFFCB2611),
-              //     // Colors.red,
-              //     // Color(0xFFCB2611),
-              //     HSVColor.fromColor(Colors.red).withValue(0.45).toColor(),
-              //     HSVColor.fromColor(Colors.red).withSaturation(0.85).toColor(),
-              //     HSVColor.fromColor(Colors.red).withValue(0.45).toColor(),
-              //   ],
-              //   begin: Alignment.centerLeft,
-              //   end: Alignment.centerRight,
-              // ),
-            ),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: const [
-                    AudioSection(),
-                    Divider(),
-                    TimerSection(),
-                  ],
-                ),
+      body: LayoutBuilder(builder: (context, constraints) {
+        return Container(
+          width: constraints.maxWidth,
+          height: constraints.maxHeight,
+          decoration: BoxDecoration(
+            color:
+                HSVColor.fromColor(Colors.red).withSaturation(0.75).toColor(),
+          ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  Obx(
+                    () => AudioSection(
+                      ringingVolume: controller.ringingVolume.value,
+                      tickingVolume: controller.tickingVolume.value,
+                      ringingVolumeCallback: controller.updateRingingVolume,
+                      tickingVolumeCallback: controller.updateTickingVolume,
+                    ),
+                  ),
+                  const Divider(),
+                  Obx(
+                    () => TimerSection(
+                      longBreakDuration: controller.longBreakDuration.value,
+                      longBreakDurationCallback:
+                          controller.updateLongBreakDuration,
+                      pomodoroDuration: controller.pomodoroDuration.value,
+                      pomodoroDurationCallback:
+                          controller.updatePomodoroDuration,
+                      shortBreakDuration: controller.shortBreakDuration.value,
+                      shortBreakDurationCallback:
+                          controller.updateShortBreakDuration,
+                    ),
+                  ),
+                ],
               ),
             ),
-          );
-        }
-      ),
+          ),
+        );
+      }),
     );
   }
 }

@@ -2,7 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pomodoro/constants.dart';
 
 class TimerSection extends StatelessWidget {
-  const TimerSection({Key? key}) : super(key: key);
+  final int shortBreakDuration;
+  final int longBreakDuration;
+  final int pomodoroDuration;
+
+  final Function(int?) pomodoroDurationCallback;
+  final Function(int?) longBreakDurationCallback;
+  final Function(int?) shortBreakDurationCallback;
+
+  const TimerSection({
+    Key? key,
+    required this.pomodoroDuration,
+    required this.longBreakDuration,
+    required this.shortBreakDuration,
+    required this.pomodoroDurationCallback,
+    required this.longBreakDurationCallback,
+    required this.shortBreakDurationCallback,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +43,8 @@ class TimerSection extends StatelessWidget {
                       ),
                     )
                     .toList(),
-                onChanged: (value) {},
-                value: kPomodoroDurationList[kInitialIndex],
+                onChanged: pomodoroDurationCallback,
+                value: pomodoroDuration,
               ),
             ],
           ),
@@ -52,8 +68,8 @@ class TimerSection extends StatelessWidget {
                       ),
                     )
                     .toList(),
-                onChanged: (value) {},
-                value: kShortBreakDurationList[kInitialIndex],
+                onChanged: shortBreakDurationCallback,
+                value: shortBreakDuration,
               ),
             ],
           ),
@@ -77,8 +93,8 @@ class TimerSection extends StatelessWidget {
                       ),
                     )
                     .toList(),
-                onChanged: (value) {},
-                value: kLongBreakDurationList[kInitialIndex],
+                onChanged: longBreakDurationCallback,
+                value: longBreakDuration,
               ),
             ],
           ),

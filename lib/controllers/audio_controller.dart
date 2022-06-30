@@ -1,7 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get.dart';
+import 'settings_controller.dart';
 
 class AudioController extends GetxController {
+  final SettingsController _settingsController = Get.find<SettingsController>();
+
   final AudioPlayer _ringPlayer = AudioPlayer();
   final AudioPlayer _tickPlayer = AudioPlayer();
   final String _ringSource = 'audio/ring.wav';
@@ -11,6 +14,14 @@ class AudioController extends GetxController {
   void onInit() {
     super.onInit();
     _init();
+
+    _settingsController.ringingVolume.listen((p0) {
+      _ringPlayer.setVolume(p0);
+    });
+    _settingsController.tickingVolume.listen((p0) {
+      _tickPlayer.setVolume(p0);
+    });
+
   }
 
   @override

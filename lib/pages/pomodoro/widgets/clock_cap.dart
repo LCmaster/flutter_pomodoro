@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 
 class ClockCap extends StatelessWidget {
   final int barCount;
-  final int duration;
   final double progression;
   final double barWidth = 25;
 
   const ClockCap({
     Key? key,
     required this.barCount,
-    required this.duration,
     required this.progression,
   }) : super(key: key);
 

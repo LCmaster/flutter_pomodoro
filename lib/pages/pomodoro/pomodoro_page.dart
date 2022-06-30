@@ -24,7 +24,6 @@ class PomodoroPage extends GetView<PomodoroController> {
                 builder: (animContext, widget) {
                   return ClockCap(
                     barCount: 60,
-                    duration: controller.currentDuration.inMinutes,
                     progression: controller.animation.value.value,
                   );
                 }),

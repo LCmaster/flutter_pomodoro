@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 
 class AudioSection extends StatelessWidget {
-  const AudioSection({Key? key}) : super(key: key);
+  final double ringingVolume;
+  final double tickingVolume;
+  final Function(double) ringingVolumeCallback;
+  final Function(double) tickingVolumeCallback;
+
+  const AudioSection({
+    Key? key,
+    required this.ringingVolume,
+    required this.tickingVolume,
+    required this.ringingVolumeCallback,
+    required this.tickingVolumeCallback,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,22 +21,11 @@ class AudioSection extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              'Enable Ticking',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-          ),
-          Checkbox(value: true, onChanged: (value) {}),
-        ],
-      ),
-      Row(
-        children: [
-          Expanded(
-            child: Text(
               'Ticking Volume',
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          Slider(value: 1.0, onChanged: (double value) {}),
+          Slider(value: tickingVolume, onChanged: tickingVolumeCallback),
         ],
       ),
       Row(
@@ -36,7 +36,7 @@ class AudioSection extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          Slider(value: 1.0, onChanged: (double value) {}),
+          Slider(value: ringingVolume, onChanged: ringingVolumeCallback),
         ],
       ),
     ]);
