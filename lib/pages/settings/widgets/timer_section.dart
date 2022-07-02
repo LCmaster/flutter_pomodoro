@@ -33,29 +33,27 @@ class TimerSection extends StatelessWidget {
                 'Pomodoro Duration',
                 style: Theme.of(context).textTheme.headline6,
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                        color: Colors.white54,
-                        width: 1,
-                      )
+              DropdownButton(
+                isExpanded: true,
+                items: kPomodoroDurationList
+                    .map(
+                      (e) => DropdownMenuItem<int>(
+                        value: e,
+                        child: Text('$e minutes'),
+                      ),
+                    )
+                    .toList(),
+                onChanged: pomodoroDurationCallback,
+                value: pomodoroDuration,
+                iconEnabledColor: Colors.white,
+                underline: Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                      color: Colors.white,
+                      width: 1,
+                    )),
                   ),
-                ),
-                child: DropdownButton(
-                  isExpanded: true,
-                  items: kPomodoroDurationList
-                      .map(
-                        (e) => DropdownMenuItem<int>(
-                          value: e,
-                          child: Text('$e minutes'),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: pomodoroDurationCallback,
-                  value: pomodoroDuration,
-                  iconEnabledColor: Colors.white,
-                  underline: const SizedBox(),
                 ),
               ),
             ],
@@ -70,28 +68,27 @@ class TimerSection extends StatelessWidget {
                 'Short Break Duration',
                 style: Theme.of(context).textTheme.headline6,
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                        color: Colors.white54,
-                        width: 1,
-                      )
+              DropdownButton(
+                isExpanded: true,
+                items: kShortBreakDurationList
+                    .map(
+                      (e) => DropdownMenuItem<int>(
+                        value: e,
+                        child: Text('$e minutes'),
+                      ),
+                    )
+                    .toList(),
+                onChanged: shortBreakDurationCallback,
+                value: shortBreakDuration,
+                iconEnabledColor: Colors.white,
+                underline: Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                          color: Colors.white,
+                          width: 1,
+                        )),
                   ),
-                ),
-                child: DropdownButton(
-                  isExpanded: true,
-                  items: kShortBreakDurationList
-                      .map(
-                        (e) => DropdownMenuItem<int>(
-                          value: e,
-                          child: Text('$e minutes'),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: shortBreakDurationCallback,
-                  value: shortBreakDuration,
-                  iconEnabledColor: Colors.white,
                 ),
               ),
             ],
@@ -106,28 +103,27 @@ class TimerSection extends StatelessWidget {
                 'Long Break Duration',
                 style: Theme.of(context).textTheme.headline6,
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.white54,
-                      width: 1,
+              DropdownButton(
+                isExpanded: true,
+                items: kLongBreakDurationList
+                    .map(
+                      (e) => DropdownMenuItem<int>(
+                        value: e,
+                        child: Text('$e minutes'),
+                      ),
                     )
+                    .toList(),
+                onChanged: longBreakDurationCallback,
+                value: longBreakDuration,
+                iconEnabledColor: Colors.white,
+                underline: Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                          color: Colors.white,
+                          width: 1,
+                        )),
                   ),
-                ),
-                child: DropdownButton(
-                  isExpanded: true,
-                  items: kLongBreakDurationList
-                      .map(
-                        (e) => DropdownMenuItem<int>(
-                          value: e,
-                          child: Text('$e minutes'),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: longBreakDurationCallback,
-                  value: longBreakDuration,
-                  iconEnabledColor: Colors.white,
                 ),
               ),
             ],
